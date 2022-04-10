@@ -4,16 +4,20 @@ pipeline {
     tools {
         // Install the Maven version configured as "M3" and add it to the path.
         maven 'Default maven' // the maven defined in the jenkins maven installation
+
     }
 
     // stages to build the staff
     stages {
         // build the staff using maven
-        stage('Build') { 
+        stage('Build & Static analysis') { 
             steps {
-                sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package' // notice the path here
+                sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package sonar:sonar' // notice the path here
             }
         }
+
+        // the build is complete, run the sonarcube
+
 
         // run the test on the project
         stage('Test') {
@@ -24,8 +28,8 @@ pipeline {
             }
             post {
                 always {
-                    // junit './Calculator/target/surefire-reports/*.xml'
-                    junit '**/Calculator/target/surefire-reports/*.xml'
+                    // junit './Calculator/target/surefire-reports/*.xml' // no idea why this one not work ...
+                    junit '**/Calculator/target/surefire-reports/*.xml' // but force a search on the workspace scale with project prefix work
                 }
             }
         }
