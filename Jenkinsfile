@@ -24,6 +24,7 @@ pipeline {
             }
             post {
                 always {
+                    sh "pwd"
                     sleep 5
                     junit './Quality-Theory-HW3/Calculator/target/surefire-reports/*.xml'
                 }
