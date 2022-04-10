@@ -27,8 +27,10 @@ pipeline {
         }
 
         // build the staff using maven
-        stage('Build & Static analysis') { 
-            sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package sonar:sonar' // notice the path here
+        stage('Build') { 
+            steps {
+                sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package' // notice the path here
+            }
         }
 
         // the build is complete, run the sonarcube
