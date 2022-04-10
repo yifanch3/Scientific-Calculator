@@ -13,14 +13,15 @@ pipeline {
         stage('Sonar analysis') {
             environment {
                 SCANNER_HOME = tool 'SonarQubeScanner'
-                // ORGANIZATION = "igorstojanovski-github"
-                // PROJECT_NAME = "igorstojanovski_jenkins-pipeline-as-code"
+                ORGANIZATION = "yifanch3_HW3"
+                PROJECT_NAME = "yifanch3_HW3_code"
             }
             steps {
                 withSonarQubeEnv('LocalSonarCloud') {
-                    // sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    // -Dsonar.sources=.'''
-                    sh '$SCANNER_HOME/bin/sonar-scanner'
+                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
+                    -Dsonar.java.binaries=build/classes/java/ \
+                    -Dsonar.projectKey=$PROJECT_NAME \
+                    -Dsonar.sources=.'''
                 }
             }
         }
