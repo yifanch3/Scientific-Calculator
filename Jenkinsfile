@@ -24,9 +24,8 @@ pipeline {
             }
             post {
                 always {
-                    sleep 5
-                    sh 'cd `pwd`' // force refresh the directories, otherwise the new surefire-reports can't be found
-                    junit './Calculator/target/surefire-reports/*.xml'
+                    // junit './Calculator/target/surefire-reports/*.xml'
+                    junit '**/Calculator/target/surefire-reports/*.xml'
                 }
             }
         }
