@@ -9,7 +9,16 @@ pipeline {
 
     // stages to build the staff
     stages {
-        // run static analysis 
+
+        // build the staff using maven first
+        stage('Build') { 
+            steps {
+                sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package' // notice the path here
+            }
+        }
+
+
+        // then run static analysis 
         stage('Sonar analysis') {
             environment {
                 SCANNER_HOME = tool 'SonarQubeScanner'
@@ -19,17 +28,10 @@ pipeline {
             steps {
                 withSonarQubeEnv('LocalSonarCloud') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
-                    -Dsonar.java.binaries=build/classes/java/ \
+                    -Dsonar.java.binaries=./Calculator/target/classes/io/michaelcane \
                     -Dsonar.projectKey=$PROJECT_NAME \
                     -Dsonar.sources=.'''
                 }
-            }
-        }
-
-        // build the staff using maven
-        stage('Build') { 
-            steps {
-                sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package' // notice the path here
             }
         }
 
