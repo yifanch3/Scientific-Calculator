@@ -10,16 +10,17 @@ pipeline {
     // stages to build the staff
     stages {
         // run static analysis 
-        stage('SonarCloud') {
+        stage('Sonar analysis') {
             environment {
                 SCANNER_HOME = tool 'SonarQubeScanner'
                 // ORGANIZATION = "igorstojanovski-github"
                 // PROJECT_NAME = "igorstojanovski_jenkins-pipeline-as-code"
             }
             steps {
-                withSonarQubeEnv('SonarCloudOne') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.sources=.'''
+                withSonarQubeEnv('LocalSonarCloud') {
+                    // sh '''$SCANNER_HOME/bin/sonar-scanner \
+                    // -Dsonar.sources=.'''
+                    sh '$SCANNER_HOME/bin/sonar-scanner'
                 }
             }
         }
