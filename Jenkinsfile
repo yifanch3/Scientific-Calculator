@@ -11,14 +11,14 @@ pipeline {
         // build the staff using maven
         stage('Build') { 
             steps {
-                sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package' 
+                sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package' // notice the path here
             }
         }
 
         // run the test on the project
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn -f ./Calculator/pom.xml test' // notice the valid demonstration of the path
             }
             post {
                 always {
