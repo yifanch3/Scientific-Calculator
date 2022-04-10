@@ -1,10 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
-        }
+    agent any // set agent by free
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "M3" // install the right maven version here
     }
+
     stages {
         stage('Build') { 
             steps {
