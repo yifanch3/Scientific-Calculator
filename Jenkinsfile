@@ -24,9 +24,9 @@ pipeline {
             }
             post {
                 always {
-                    sh "pwd"
                     sleep 5
-                    junit './Quality-Theory-HW3/Calculator/target/surefire-reports/*.xml'
+                    sh 'cd `pwd`' // force refresh the directories, otherwise the new surefire-reports can't be found
+                    junit './Calculator/target/surefire-reports/*.xml'
                 }
             }
         }
