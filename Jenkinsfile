@@ -10,11 +10,19 @@ pipeline {
     // stages to build the staff
     stages {
         // run static analysis 
-        stage('SonarQube analysis') {
-            def sonarqubeScannerHome = tool name: 'SonarQube Scanner'
-
-            withSonarQubeEnv('SonarQube') {
-                sh "${sonarqubeScannerHome}/bin/sonar-scanner"
+        stage('SonarCloud') {
+            environment {
+                SCANNER_HOME = tool 'SonarQubeScanner'
+                ORGANIZATION = "igorstojanovski-github"
+                PROJECT_NAME = "igorstojanovski_jenkins-pipeline-as-code"
+            }
+            steps {
+                withSonarQubeEnv('SonarCloudOne') {
+                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
+                    -Dsonar.java.binaries=build/classes/java/ \
+                    -Dsonar.projectKey=$PROJECT_NAME \
+                    -Dsonar.sources=.'''
+                }
             }
         }
 
