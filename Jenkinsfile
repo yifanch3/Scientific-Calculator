@@ -25,8 +25,7 @@ pipeline {
             post {
                 always {
                     sleep 5
-                    junit './Calculator/target/surefire-reports/*.xml'
-                    // junit '**/target/surefire-reports/*.xml'
+                    junit './Quality-Theory-HW3/Calculator/target/surefire-reports/*.xml'
                 }
             }
         }
