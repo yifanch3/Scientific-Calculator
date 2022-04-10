@@ -6,10 +6,23 @@ pipeline {
         maven 'Default maven' // the maven defined in the jenkins maven installation
     }
 
+    // stages to build the staff
     stages {
         stage('Build') { 
             steps {
                 sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package' 
+            }
+        }
+    }
+
+
+    stage('Test') {
+        steps {
+            sh 'mvn test'
+        }
+        post {
+            always {
+                junit 'target/surefire-reports/*.xml'
             }
         }
     }
