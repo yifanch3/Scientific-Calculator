@@ -18,7 +18,9 @@ pipeline {
         // run the test on the project
         stage('Test') {
             steps {
-                sh 'mvn -f ./Calculator/pom.xml test' // notice the valid demonstration of the path
+                // notice we mention the path directly, the folder structure of this project is different
+                // and we need to point out the exact test class here
+                sh 'mvn -f ./Calculator/pom.xml -Dtest=CalculatorSpec test' 
             }
             post {
                 always {
@@ -26,6 +28,7 @@ pipeline {
                 }
             }
         }
+        
     }
 
 }
