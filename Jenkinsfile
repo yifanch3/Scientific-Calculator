@@ -24,8 +24,9 @@ pipeline {
             }
             post {
                 always {
-                    // junit './Calculator/target/surefire-reports/TEST-io.michaelcane.CalculatorSpec.xml'
-                    junit '**/target/surefire-reports/*.xml'
+                    sleep 5
+                    junit './Calculator/target/surefire-reports/*.xml'
+                    // junit '**/target/surefire-reports/*.xml'
                 }
             }
         }
