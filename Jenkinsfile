@@ -9,11 +9,18 @@ pipeline {
 
     // stages to build the staff
     stages {
+        // run static analysis 
+        stage('SonarQube analysis') {
+            def sonarqubeScannerHome = tool name: 'Default SonarQube'
+
+            withSonarQubeEnv('SonarQube') {
+                sh "${sonarqubeScannerHome}/bin/sonar-scanner"
+            }
+        }
+
         // build the staff using maven
         stage('Build & Static analysis') { 
-            steps {
-                sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package sonar:sonar' // notice the path here
-            }
+            sh 'mvn -f ./Calculator/pom.xml -B -DskipTests clean package sonar:sonar' // notice the path here
         }
 
         // the build is complete, run the sonarcube
