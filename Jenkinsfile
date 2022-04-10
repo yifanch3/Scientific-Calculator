@@ -24,11 +24,11 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    junit '/Calculator/target/surefire-reports/*.xml'
                 }
             }
         }
-        
+
     }
 
 }
