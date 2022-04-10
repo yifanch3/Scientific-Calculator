@@ -27,6 +27,7 @@ pipeline {
             }
             steps {
                 withSonarQubeEnv('LocalSonarCloud') {
+                    sh 'pwd'
                     sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
                     -Dsonar.java.binaries=./Calculator/target/classes/io/michaelcane \
                     -Dsonar.projectKey=$PROJECT_NAME \
