@@ -1,10 +1,10 @@
 pipeline {
     agent any // set agent by free
 
-    tools {
-        // Install the Maven version configured as "M3" and add it to the path.
-        maven 'Maven 3.3.9' // install the right maven version here
-    }
+    // tools {
+    //     // Install the Maven version configured as "M3" and add it to the path.
+    //     maven 'Maven 3.3.9' // install the right maven version here
+    // }
 
     stages {
         stage('Build') { 
