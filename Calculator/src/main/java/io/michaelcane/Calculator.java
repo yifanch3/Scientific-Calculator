@@ -58,6 +58,22 @@ public class Calculator {
         return Math.sqrt(value1);
     }
 
+    public static double cube(double value1) {
+        return value1 * value1 * value1;
+    }
+
+    public static double log2(double inputValue) {
+        return Math.log(inputValue) / Math.log(2.0);
+    }
+
+    public static double addList(double[] numbers) {
+        double result = 0;
+        for (int index = 0; index < numbers.length; index += 1) {
+            result += numbers[index];
+        }
+        return result;
+    }
+
     public static double variableExponentiation(double value1, double value2) {
         /**
          * This method should evaluate value1 (double) to the power of value2 (double).

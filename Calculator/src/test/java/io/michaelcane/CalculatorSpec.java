@@ -216,6 +216,29 @@ public class CalculatorSpec {
     }
 
 
+    @Test
+    public void testCube() {
+        double expectedValue = 0.1 * 0.1 * 0.1;
+        double resultValue = calculator.cube(0.1);
+        assertEquals("This should evaluate to 0.0001", expectedValue, resultValue, delta);
+    }
+
+
+    @Test 
+    public void testAddList() {
+        double[] param = {0.1, 0.2, 0.3};
+        double expectedValue = 0.1 + 0.2 + 0.3;
+        double resultValue = calculator.addList(param);
+        assertEquals("This should evaluate to 0.6", expectedValue, resultValue, delta);
+    }
+
+    @Test 
+    public void testLog2() {
+        double expectedValue = 1.0;
+        double resultValue = calculator.log2(2.0);
+        assertEquals("This should evaluate to 1.0", expectedValue, resultValue, delta);
+    }
+
 
 
 
